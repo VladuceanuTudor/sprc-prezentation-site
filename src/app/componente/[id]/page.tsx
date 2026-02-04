@@ -6,7 +6,9 @@ import Link from 'next/link';
 import {
   ArrowLeft,
   Users,
-  ListChecks,
+  Target,
+  CheckCircle2,
+  Wrench,
   Router,
   Monitor,
   Globe,
@@ -17,8 +19,8 @@ import {
   Database,
   AlertTriangle,
   Wifi,
-  CheckCircle2,
-  Star
+  Star,
+  Sparkles
 } from 'lucide-react';
 import { getComponentById, componentsData, ComponentData } from '@/lib/data';
 
@@ -79,6 +81,10 @@ export default function ComponentDetailPage() {
     c => c.subnet === component.subnet && c.id !== component.id
   );
 
+  // Count bonus achievements
+  const bonusCount = component.achievements.filter(a => a.toLowerCase().includes('bonus')).length;
+  const regularCount = component.achievements.length - bonusCount;
+
   return (
     <main className="min-h-screen bg-gradient-animated">
       {/* Header */}
@@ -135,22 +141,108 @@ export default function ComponentDetailPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-lg text-white/60 max-w-3xl mx-auto"
+              className="text-lg text-white/60 max-w-3xl mx-auto mb-6"
             >
               {component.description}
             </motion.p>
+
+            {/* Quick Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="flex flex-wrap justify-center gap-4"
+            >
+              <div className="glass-card-light px-4 py-2 flex items-center gap-2">
+                <Users size={16} className="text-indigo-400" />
+                <span className="text-sm text-white/80">{component.teamMembers.length} membri</span>
+              </div>
+              <div className="glass-card-light px-4 py-2 flex items-center gap-2">
+                <CheckCircle2 size={16} className="text-green-400" />
+                <span className="text-sm text-white/80">{regularCount} realizări</span>
+              </div>
+              {bonusCount > 0 && (
+                <div className="glass-card-light px-4 py-2 flex items-center gap-2">
+                  <Star size={16} className="text-amber-400" />
+                  <span className="text-sm text-white/80">{bonusCount} bonus</span>
+                </div>
+              )}
+              <div className="glass-card-light px-4 py-2 flex items-center gap-2">
+                <Wrench size={16} className="text-cyan-400" />
+                <span className="text-sm text-white/80">{component.technologies.length} tehnologii</span>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Content */}
+      {/* Scope Section */}
+      <section className="px-4 md:px-8 pb-6">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35 }}
+            className="glass-card p-6"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 rounded-lg" style={{ backgroundColor: `${component.color}20` }}>
+                <Target className="w-5 h-5" style={{ color: component.color }} />
+              </div>
+              <h2 className="text-xl font-bold text-white">Scopul Echipei</h2>
+            </div>
+            <p className="text-white/70 text-lg leading-relaxed">
+              {component.scope}
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Technologies */}
+      <section className="px-4 md:px-8 pb-6">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="glass-card p-6"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 rounded-lg bg-cyan-500/20">
+                <Wrench className="w-5 h-5 text-cyan-400" />
+              </div>
+              <h2 className="text-xl font-bold text-white">Tehnologii Utilizate</h2>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {component.technologies.map((tech, index) => (
+                <motion.span
+                  key={tech}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.45 + index * 0.03 }}
+                  className="px-3 py-1.5 rounded-full text-sm font-medium"
+                  style={{
+                    backgroundColor: `${component.color}15`,
+                    color: component.color,
+                    border: `1px solid ${component.color}30`
+                  }}
+                >
+                  {tech}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Main Content */}
       <section className="px-4 md:px-8 pb-12">
         <div className="max-w-5xl mx-auto grid lg:grid-cols-3 gap-6">
           {/* Team Members */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.5 }}
             className="lg:col-span-1"
           >
             <div className="glass-card p-6 sticky top-24">
@@ -172,7 +264,7 @@ export default function ComponentDetailPage() {
                     key={member.name}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.4 + index * 0.1 }}
+                    transition={{ delay: 0.55 + index * 0.1 }}
                     className="team-member-card"
                   >
                     <div className="flex items-center gap-3">
@@ -198,40 +290,40 @@ export default function ComponentDetailPage() {
             </div>
           </motion.div>
 
-          {/* Requirements */}
+          {/* Achievements */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.5 }}
             className="lg:col-span-2"
           >
             <div className="glass-card p-6">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-2 rounded-lg bg-green-500/20">
-                  <ListChecks className="w-5 h-5 text-green-400" />
+                  <Sparkles className="w-5 h-5 text-green-400" />
                 </div>
                 <div>
-                  <h2 className="text-lg font-bold text-white">Cerințe</h2>
+                  <h2 className="text-lg font-bold text-white">Ce au realizat</h2>
                   <p className="text-sm text-white/50">
-                    {component.requirements.length} task-uri de implementat
+                    {component.achievements.length} realizări implementate
                   </p>
                 </div>
               </div>
 
               <div className="space-y-2">
-                {component.requirements.map((req, index) => {
-                  const isBonus = req.toLowerCase().includes('bonus');
+                {component.achievements.map((achievement, index) => {
+                  const isBonus = achievement.toLowerCase().includes('bonus');
                   return (
                     <motion.div
                       key={index}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4 + index * 0.05 }}
+                      transition={{ delay: 0.55 + index * 0.03 }}
                       className={`requirement-item flex items-start gap-3 ${
-                        isBonus ? 'border-l-amber-500' : ''
+                        isBonus ? 'border-l-amber-500 bg-amber-500/5' : ''
                       }`}
                       style={{
-                        borderLeftColor: isBonus ? '#f59e0b' : undefined
+                        borderLeftColor: isBonus ? '#f59e0b' : component.color
                       }}
                     >
                       {isBonus ? (
@@ -243,7 +335,7 @@ export default function ComponentDetailPage() {
                         />
                       )}
                       <span className={`text-sm ${isBonus ? 'text-amber-200' : 'text-white/70'}`}>
-                        {req}
+                        {achievement}
                       </span>
                     </motion.div>
                   );
@@ -256,11 +348,11 @@ export default function ComponentDetailPage() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
+                transition={{ delay: 0.7 }}
                 className="glass-card p-6 mt-6"
               >
                 <h3 className="text-lg font-bold text-white mb-4">
-                  Componente din aceeași subrețea
+                  Alte componente din {subnetLabels[component.subnet]}
                 </h3>
                 <div className="grid sm:grid-cols-2 gap-3">
                   {relatedComponents.map((related) => {
@@ -285,7 +377,7 @@ export default function ComponentDetailPage() {
                               {related.shortTitle}
                             </p>
                             <p className="text-xs text-white/50">
-                              {related.teamMembers.length} membri
+                              {related.teamMembers.length} membri • {related.achievements.length} realizări
                             </p>
                           </div>
                         </div>
