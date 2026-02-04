@@ -1,0 +1,14 @@
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+Titlu,Deployment Infrastructura,Active Directory (workstations + DC),DMZ (Rev Proxy + Moodle + Gitlab + Mail + Chat),DMZ + Internal (DNS + site prezentare + management UI DNS + management UI reverse proxy),DMZ + Internal (VPN + LDAP + LDAP Management UI),Internal Services (Rev proxy + next cloud + plane + wikijs/dokuwiki),Monitorizare (Wazuh + Ansible + Semphore UI + Grafana sau Zabbix + Uptime Kuma + Wazuh Bot),Monitorizare (Arkime + ELK + Splunk + Clam AV),Monitorizare (PCAP Puller + Snort + Websnort + Snort Rules and Alerts Management UI),Internet Simulat,Total
+Nr. max membrii,4,3,3,3,3,3,4,3,3,3,32
+ Membru 1,PONTOŞ  ALEXANDRU-MIHAI (C114A),ŞANDRU MARIA-LAURA (C114A),IVESCU IONUȚ-MIRCEA (C114D),VLĂDUCEANU  TUDOR (C114B),ACOSTI CLAUDIU-MIREL (C114D),MILEA ALEXANDRU-NICOLAE (C114B),STAN ŞTEFAN-SABIN (C114A),TĂTAR IOAN-DAN (C114C),LEU CONSTANTIN-CĂTĂLIN (C114B),SOFIANU GABRIELA (C114C),
+Membru 2,AXINESCU VALENTIN-DANIEL (C114D),APAHIDEAN  LUCA-TEODOR (C114B),COSTAN RAREŞ-IONUŢ (C114C),RUSU PETRU-CĂLIN (C114A),STOICA  CRISTIAN-IONUŢ (C114B),BRĂILA GEORGE-SEBASTIAN (C114D),NEGUŢ DIANA-MIHAELA (C114B),GRAURE DARIANA-GABRIELA (C114D),NEGOESCU ELENA-CAMELIA (C114A),DINU  LIVIU-ANDREI (C114B),
+Membru 3,FILIP LARISA-ALEXIA (C114C),ROŞCA GEORGE-MIHAI (C114C),ȚURCANU IULIANA-MARIA (C114B),STANCIU GEORGE-RĂZVAN (C114C),PILIPĂUŢANU TUDOR (C114A),GĂITAN  NICOLAI (C114A),CHIVU  BOGDAN-NICOLAE (C114C),ŞTEOPOAE ANAMARIA-PEREGRINA (C114A),RUS EMANUEL-DANIEL (C114D),ALDEA ALEXANDRA-MARILENA (C114D),
+Membru 4,PASCU DARIA (C114B),,,,,,BADEA ALEXANDRU-GABRIEL (C114D),,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+Credentiale openstack,sprc1,UyPPtTsjLgNt,Domain: MTA,,,,,,,,

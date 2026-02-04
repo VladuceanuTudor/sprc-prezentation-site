@@ -1,65 +1,192 @@
-import Image from "next/image";
+'use client';
+
+import { motion } from 'framer-motion';
+import { Network, Users, Shield, Server } from 'lucide-react';
+import ArchitectureDiagram from '@/components/ArchitectureDiagram';
+import { componentsData } from '@/lib/data';
+
+const stats = [
+  { icon: Network, label: 'Subrețele', value: '5' },
+  { icon: Users, label: 'Membri Echipă', value: '32' },
+  { icon: Shield, label: 'Componente', value: '10' },
+  { icon: Server, label: 'VM-uri', value: '20+' },
+];
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <main className="min-h-screen bg-gradient-animated">
+      {/* Hero Section */}
+      <section className="relative pt-12 pb-8 px-4 md:px-8">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-8"
+          >
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2, type: 'spring' }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card-light mb-6"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              <span className="text-sm text-white/70">Proiect SPRC 2025-2026</span>
+            </motion.div>
+
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
+              <span className="text-white">Infrastructura </span>
+              <span className="text-gradient">sprc.mta</span>
+            </h1>
+
+            <p className="text-lg md:text-xl text-white/60 max-w-3xl mx-auto">
+              Platformă completă de rețea organizațională care permite angajaților
+              să lucreze atât de la birou cât și de acasă, cu servicii de monitorizare,
+              securitate și colaborare.
+            </p>
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-12"
+          >
+            {stats.map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5 + index * 0.1 }}
+                className="glass-card-light p-4 text-center"
+              >
+                <stat.icon className="w-6 h-6 mx-auto mb-2 text-indigo-400" />
+                <p className="text-2xl md:text-3xl font-bold text-white">{stat.value}</p>
+                <p className="text-sm text-white/50">{stat.label}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Architecture Section */}
+      <section className="relative px-4 md:px-8 pb-12">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="glass-card p-2 md:p-4"
+          >
+            <div className="flex items-center justify-between mb-4 px-4 pt-4">
+              <div>
+                <h2 className="text-xl md:text-2xl font-bold text-white/90">
+                  Arhitectura Infrastructurii
+                </h2>
+                <p className="text-sm text-white/50">
+                  Click pe orice componentă pentru detalii
+                </p>
+              </div>
+              <div className="hidden md:flex items-center gap-4 text-sm text-white/50">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-blue-500" />
+                  <span>Workstations</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-amber-500" />
+                  <span>DMZ</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-cyan-500" />
+                  <span>Development</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-pink-500" />
+                  <span>Monitoring</span>
+                </div>
+              </div>
+            </div>
+
+            <ArchitectureDiagram />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Info Section */}
+      <section className="relative px-4 md:px-8 pb-16">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-6">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="glass-card p-6"
             >
-              Learning
-            </a>{" "}
-            center.
+              <h3 className="text-xl font-bold text-white/90 mb-4">Despre Proiect</h3>
+              <p className="text-white/60 mb-4">
+                Scopul proiectului este de a crea o infrastructură de rețea completă pentru
+                organizația sprc.mta. Aceasta include:
+              </p>
+              <ul className="space-y-2 text-white/60">
+                <li className="flex items-start gap-2">
+                  <span className="text-indigo-400 mt-1">•</span>
+                  <span>Rețea de stații de lucru cu Active Directory</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-indigo-400 mt-1">•</span>
+                  <span>Zonă DMZ cu servicii expuse pe internet</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-indigo-400 mt-1">•</span>
+                  <span>Mediu de dezvoltare cu servicii interne</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-indigo-400 mt-1">•</span>
+                  <span>Sistem complet de monitorizare și securitate</span>
+                </li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="glass-card p-6"
+            >
+              <h3 className="text-xl font-bold text-white/90 mb-4">Tehnologii Utilizate</h3>
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  'OpenStack', 'Kubernetes', 'Docker Swarm', 'OpnSense/VYOS',
+                  'Windows Server', 'Active Directory', 'GitLab', 'Moodle',
+                  'Wazuh SIEM', 'ELK Stack', 'Grafana', 'Ansible'
+                ].map((tech, index) => (
+                  <motion.div
+                    key={tech}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.05 }}
+                    className="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white/70 text-center"
+                  >
+                    {tech}
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="relative px-4 md:px-8 py-8 border-t border-white/10">
+        <div className="max-w-7xl mx-auto text-center">
+          <p className="text-white/40 text-sm">
+            Proiect SPRC 2025-2026 • Universitatea Politehnica București
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </footer>
+    </main>
   );
 }
